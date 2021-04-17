@@ -23,17 +23,8 @@ public class PodcastCatalogResource {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
-
     @RequestMapping("/{userId}") // {variable}
     public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
-
-        // call podcast-info and get details
-        // List<Rating> ratings = Arrays.asList(
-        //     new Rating("1", 4), 
-        //     new Rating("2", 5)
-        // );
 
         UserRating ratings = restTemplate.getForObject("http://ratings-data-service/ratingdata/users/"+userId, UserRating.class);
         
@@ -47,15 +38,6 @@ public class PodcastCatalogResource {
             return new CatalogItem(podcast.getName(), "Security", rating.getRating());
        
         }).collect(Collectors.toList());
-
-
-       /* Podcast podcast = webClientBuilder.build()
-         .get()
-         .uri("http://localhost:8082/podcasts/" + rating.getPodcastId())
-         .retrieve()
-         .bodyToMono(Podcast.class)
-         .block(); //blocking execution until "mono" is fullfilled */
-
 
     }
 }
