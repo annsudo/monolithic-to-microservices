@@ -22,10 +22,13 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/catalog")
 public class PodcastCatalogResource {
 
+    @Autowired
+    private RestTemplate restTemplate;
+
+
     @RequestMapping("/{userId}") 
     public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
 
-        RestTemplate restTemplate= new RestTemplate();
 
     }
 }
