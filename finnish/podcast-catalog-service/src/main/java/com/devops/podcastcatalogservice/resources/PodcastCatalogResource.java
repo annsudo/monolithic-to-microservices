@@ -23,6 +23,9 @@ public class PodcastCatalogResource {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private WebClient.Builder webClientBuilder;
+
     @RequestMapping("/{userId}") // {variable}
     public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
 
